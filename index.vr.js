@@ -7,6 +7,8 @@ import {
   Text,
   View,
 } from 'react-vr';
+import ReactMixin from 'react-mixin'
+import TimerMixin from 'react-timer-mixin'
 import MyText from './components/my_text.js'
 
 const textStyle = {
@@ -21,6 +23,15 @@ const textStyle = {
 }
 
 export default class MyFirstVR extends React.Component {
+  state = { rotate: 0 }
+
+  componentDidMount() {
+    this.mixins = [TimerMixin]
+    this.setInterval(() => {
+      this.setState({ rotate: this.state.rotate + 2 })
+    }, 30)
+  }
+
   render() {
     return (
       <View>
@@ -35,7 +46,7 @@ export default class MyFirstVR extends React.Component {
         <MyText
           style={{
             fontSize: 0.5,
-            transform: [{translate: [0, 1, -2]}],
+            transform: [{translate: [0 , 1, -2]}, {rotateY: `${this.state.rotate}deg`}],
           }}>
           First
         </MyText>
@@ -50,5 +61,7 @@ export default class MyFirstVR extends React.Component {
     );
   }
 };
+
+ReactMixin.onClass(MyFirstVR, TimerMixin)
 
 AppRegistry.registerComponent('MyFirstVR', () => MyFirstVR);
