@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from 'react-vr';
+import MyText from './components/my_text.js'
 
 const textStyle = {
   color: 'rgba(255, 255, 255, 0.3)',
@@ -31,14 +32,13 @@ export default class MyFirstVR extends React.Component {
           }}>
           My
         </Text>
-        <Text
+        <MyText
           style={{
-            ...textStyle,
             fontSize: 0.5,
             transform: [{translate: [0, 1, -2]}],
           }}>
           First
-        </Text>
+        </MyText>
         <Text
           style={{
             ...textStyle,
